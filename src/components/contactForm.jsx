@@ -6,53 +6,24 @@ const ContactForm = () => {
     name: "",
     email: "",
     message: "",
-    phone: "", // Added phone number field
-  });
-
-  const [errors, setErrors] = useState({
     phone: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
-    // Clear errors when user modifies the phone field
-    if (name === "phone") {
-      setErrors({ ...errors, phone: "" });
-    }
-  };
-
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = {};
-
-    // Check if the phone number is exactly 11 digits long
-    const phonePattern = /^[0-9]{11}$/;
-    if (formData.phone && !phonePattern.test(formData.phone)) {
-      newErrors.phone = "Please enter a valid 11-digit phone number.";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (validateForm()) {
-      // Handle form submission logic here
-      alert("Message sent");
-      // Reset form after submission
-      setFormData({ name: "", email: "", message: "", phone: "" });
-    }
+    console.log("Form submitted:", formData);
+    setFormData({ name: "", email: "", message: "", phone: "" });
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-lg mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
+      className="max-w-lg mx-auto p-4 bg-gray-100 rounded-lg shadow-md overflow-hidden">
       <div className="mb-4">
         <label className="block text-left mb-2" htmlFor="name">
           Name
@@ -86,14 +57,13 @@ const ContactForm = () => {
           Phone Number
         </label>
         <input
-          type="number"
+          type="text"
           id="phone"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
           className="bg-white w-full p-2 border border-gray-300 rounded"
         />
-        {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
       </div>
       <div className="mb-4">
         <label className="block text-left mb-2" htmlFor="message">
