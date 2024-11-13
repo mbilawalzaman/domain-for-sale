@@ -27,10 +27,10 @@ const ContactForm = () => {
     let isValid = true;
     const newErrors = {};
 
-    // Check if the phone number is exactly 10 digits long
-    const phonePattern = /^[0-9]{10}$/;
+    // Check if the phone number is exactly 11 digits long
+    const phonePattern = /^[0-9]{11}$/;
     if (formData.phone && !phonePattern.test(formData.phone)) {
-      newErrors.phone = "Please enter a valid 10-digit phone number.";
+      newErrors.phone = "Please enter a valid 11-digit phone number.";
       isValid = false;
     }
 
